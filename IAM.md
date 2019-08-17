@@ -7,21 +7,21 @@ gcloud config configurations list
 
 ## Obtener nombre de la configuración activa (y guardamos en variable config_activa)
 ```bash
-config_activa = $(gcloud config configurations list --filter="IS_ACTIVE=True" --format 'value(NAME)')
+export config_activa=$(gcloud config configurations list --filter="IS_ACTIVE=True" --format 'value(NAME)')
 ```
 
 ## Obtener nombre del proyecto (y guardamos en variable proyecto)
 ```bash
-project=$(gcloud config configurations list --filter="IS_ACTIVE=True" --format 'value(PROJECT)')
+export project=$(gcloud config configurations list --filter="IS_ACTIVE=True" --format 'value(PROJECT)')
 ```
 
 ## Guardamos email de nuevo usuario administrador en la variable admin
 ```bash
-admin="admin1@instructor.ninja"
+export admin="admin1@instructor.ninja"
 ```
 ## Guardamos email de nuevo usuario developer en la variable dev
 ```bash
-dev="dev1@instructor.ninja"
+export dev="dev1@instructor.ninja"
 ```
 
 ## revisamos variables creadas
