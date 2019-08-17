@@ -10,9 +10,14 @@ gcloud config configurations list
 export config_activa=$(gcloud config configurations list --filter="IS_ACTIVE=True" --format 'value(NAME)')
 ```
 
+## Obtener lista de proyectos
+```bash
+gcloud projects list
+```
+
 ## Obtener nombre del proyecto (y guardamos en variable proyecto)
 ```bash
-export project=$(gcloud config configurations list --filter="IS_ACTIVE=True" --format 'value(PROJECT)')
+export project=$(gcloud projects list --format 'value(PROJECT_ID)')
 ```
 
 ## Guardamos email de nuevo usuario administrador en la variable admin
