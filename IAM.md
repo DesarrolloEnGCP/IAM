@@ -48,6 +48,12 @@ gcloud config list
 ```bash
 gcloud auth login
 ```
+You are already authenticated with gcloud when running
+inside the Cloud Shell and so do not need to run this
+command. Do you wish to proceed anyway?
+Do you want to continue (Y/n)?
+
+Go to the following link in your browser: https://accounts.google.com/o/oauth2/auth?
 
 ## Ver detalles de configuración (y comprobar que account ha cambiado al usuario con que hicimos login)
 ```bash
@@ -66,6 +72,10 @@ Un resultado sin error de la ejecución de este comando es obtener la configurac
 ```bash
 gcloud config configurations create config-$project-dev
 ```
+## Asignaremos el proyecto a la configuracion activa (dev1)
+```bash
+gcloud config set project $project
+```
 
 ## Autenticarse (cambiaremos de usuario a dev1@instructor.ninja)
 ```bash
@@ -80,11 +90,6 @@ gcloud config list
 ## Ver configuraciones creadas hasta ahora (PROJECT estara sin asginar para las configuraciones creadas)
 ```bash
 gcloud config configurations list
-```
-
-## Asignaremos el proyecto a la configuracion activa (dev1)
-```bash
-gcloud config set project $project
 ```
 
 ## Cambiaremos a la configuración admin
