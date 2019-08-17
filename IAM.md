@@ -43,6 +43,10 @@ gcloud config configurations create config-$project-admin
 ```bash
 gcloud config list
 ```
+## Asignaremos el proyecto a la configuracion activa (dev1)
+```bash
+gcloud config set project $project
+```
 
 ## Autenticarse (cambiaremos de usuario al nuevo administrador)
 ```bash
@@ -95,11 +99,6 @@ gcloud config configurations list
 ## Cambiaremos a la configuración admin
 ```bash
 gcloud config configurations activate config-$project-admin
-```
-
-## Asignaremos el proyecto a la configuracion activa (admin)
-```bash
-gcloud config set project $project
 ```
 
 ## Ver configuraciones creadas hasta ahora (PROJECT estara ASIGNADO para todas las configuraciones)
