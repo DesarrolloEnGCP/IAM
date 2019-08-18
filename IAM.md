@@ -110,39 +110,14 @@ gcloud projects add-iam-policy-binding $project --member user:$dev --role roles/
 ```
 Un resultado sin error de la ejecución de este comando es obtener la configuración de la politica completa, es decir el equivalente a ejecutar: gcloud projects get-iam-policy $project
 
-## Comprobamos permisos (rol) del usuario Administrador
+## Comprobamos rol(es) del usuario Administrador
 ```bash
 gcloud projects get-iam-policy $project --flatten="bindings[].members" --filter="bindings.members:user:$admin"
 ```
 
-## Comprobamos permisos (rol) del usuario Developer
+## Comprobamos rol(es) del usuario Developer
 ```bash
 gcloud projects get-iam-policy $project --flatten="bindings[].members" --filter="bindings.members:user:$dev"
-```
-
-## Comprobamos miembros con Rol Dueño (owner)
-```bash
-gcloud projects get-iam-policy $project --flatten="bindings[].members" --format="table(bindings.members)" --filter="bindings.role:roles/owner"
-```
-
-## Comprobamos miembros con Rol Editor (editor)
-```bash
-gcloud projects get-iam-policy $project --flatten="bindings[].members" --format="table(bindings.members)" --filter="bindings.role:roles/editor"
-```
-
-## Comprobamos miembros con Rol Visualizador (viewer)
-```bash
-gcloud projects get-iam-policy $project --flatten="bindings[].members" --format="table(bindings.members)" --filter="bindings.role:roles/viewer"
-```
-
-## Comprobamos permisos del Developer (roles/viewer)
-```bash
-gcloud projects get-iam-policy $project --flatten="bindings[].members" --format="table(bindings.members)" --filter="bindings.role:roles/viewer"
-```
-
-## Comprobamos miembros con Rol Visualizador (viewer)
-```bash
-gcloud projects get-iam-policy $project --flatten="bindings[].members" --format="table(bindings.members)" --filter="bindings.role:roles/viewer"
 ```
 
 ## Comparamos permisos para "Storage" de Administrador
