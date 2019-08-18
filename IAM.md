@@ -1,8 +1,6 @@
-# Cloud SDK
+# Laboratorio de IAM
 
-## Laboratorio de IAM
-
-En este laboratorio revisaremos:
+## En este laboratorio revisaremos:
 1) Como asignar propiedades a una configuración (proyecto y cuenta)
 2) Como invitar usuarios (miembros) y asginarles un Rol
 3) La relación entre un usuario y un rol (pueden ser muchos)
