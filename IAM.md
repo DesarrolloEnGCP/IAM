@@ -1,5 +1,13 @@
 # Cloud SDK
 
+## Laboratorio de IAM
+
+En este laboratorio revisaremos:
+1) Como asignar propiedades a una configuración (proyecto y cuenta)
+2) Como invitar usuarios (miembros) y asginarles un Rol
+3) La relación entre un usuario y un rol (pueden ser muchos)
+4) La relación entre un rol y sus permisos (para un recurso especifico: Storage)
+
 ## Listar configuraciones (todas)
 ```bash
 gcloud config configurations list
