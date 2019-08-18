@@ -39,7 +39,8 @@ export dev="dev1@instructor.ninja"
 ```bash
 echo "configuracion activa: $config_activa, nombre del proyecto: $project, nuevo usuario: $admin y nuevo developer: $dev"
 ```
-Este paso es MUY importante asegurate que se muestren correctamente las variables antes definidas, es decir que lo que se muestre en pantalla corresponda a algo como esto: configuracion activa: **NOMBRE CONFIGURACION**, nombre del proyecto: **NOMBRE DEL PROYECTO**, nuevo usuario: **email usuario admin** y nuevo developer: **email usuario administrador**
+Este paso es MUY importante asegurate que se muestren correctamente las variables antes definidas, es decir que lo que se muestre en pantalla corresponda a algo como esto: 
+### configuracion activa: **NOMBRE CONFIGURACION**, nombre del proyecto: **NOMBRE DEL PROYECTO**, nuevo usuario: **email usuario admin** y nuevo developer: **email usuario administrador**
 
 ## Crear una nueva configuración para el administrador
 ```bash
