@@ -64,14 +64,6 @@ Go to the following link in your browser: https://accounts.google.com/o/oauth2/a
 gcloud config list
 ```
 
-## Dar acceso a usuario administrador
-*Si aparece el error: "Email addresses and domains must be associated with an active Google Account or Google Apps account." Es por que el usuario no tiene una "cuenta de google" activa y asociada el email ingresado*
-*Para crear una (para cualquier email sea o no de Google) Google Account: https://accounts.google.com/SignUp*
-```bash
-gcloud projects add-iam-policy-binding $project --member user:$admin --role roles/editor
-```
-Un resultado sin error de la ejecución de este comando es obtener la configuración de la politica completa, es decir el equivalente a ejecutar: gcloud projects get-iam-policy $project
-
 ## Crear una nueva configuración para el developer
 ```bash
 gcloud config configurations create config-$project-dev
@@ -98,8 +90,24 @@ gcloud config configurations list
 
 ## Cambiaremos a la configuración admin
 ```bash
-gcloud config configurations activate config-$project-admin
+gcloud config configurations activate $config_activa
 ```
+
+## Dar acceso a usuario administrador
+*Si aparece el error: "Email addresses and domains must be associated with an active Google Account or Google Apps account." Es por que el usuario no tiene una "cuenta de google" activa y asociada el email ingresado*
+*Para crear una (para cualquier email sea o no de Google) Google Account: https://accounts.google.com/SignUp*
+```bash
+gcloud projects add-iam-policy-binding $project --member user:$admin --role roles/editor
+```
+Un resultado sin error de la ejecución de este comando es obtener la configuración de la politica completa, es decir el equivalente a ejecutar: gcloud projects get-iam-policy $project
+
+## Dar acceso a usuario administrador
+*Si aparece el error: "Email addresses and domains must be associated with an active Google Account or Google Apps account." Es por que el usuario no tiene una "cuenta de google" activa y asociada el email ingresado*
+*Para crear una (para cualquier email sea o no de Google) Google Account: https://accounts.google.com/SignUp*
+```bash
+gcloud projects add-iam-policy-binding $project --member user:$admin --role roles/editor
+```
+Un resultado sin error de la ejecución de este comando es obtener la configuración de la politica completa, es decir el equivalente a ejecutar: gcloud projects get-iam-policy $project
 
 ## Ver configuraciones creadas hasta ahora (PROJECT estara ASIGNADO para todas las configuraciones)
 ```bash
