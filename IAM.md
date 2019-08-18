@@ -68,6 +68,7 @@ gcloud config list
 ```bash
 gcloud config configurations create config-$project-dev
 ```
+
 ## Asignaremos el proyecto a la configuracion activa (dev1)
 ```bash
 gcloud config set project $project
@@ -101,16 +102,55 @@ gcloud projects add-iam-policy-binding $project --member user:$admin --role role
 ```
 Un resultado sin error de la ejecución de este comando es obtener la configuración de la politica completa, es decir el equivalente a ejecutar: gcloud projects get-iam-policy $project
 
-## Dar acceso a usuario administrador
+## Dar acceso a usuario developer
 *Si aparece el error: "Email addresses and domains must be associated with an active Google Account or Google Apps account." Es por que el usuario no tiene una "cuenta de google" activa y asociada el email ingresado*
 *Para crear una (para cualquier email sea o no de Google) Google Account: https://accounts.google.com/SignUp*
 ```bash
-gcloud projects add-iam-policy-binding $project --member user:$admin --role roles/editor
+gcloud projects add-iam-policy-binding $project --member user:$dev --role roles/viewer
 ```
 Un resultado sin error de la ejecución de este comando es obtener la configuración de la politica completa, es decir el equivalente a ejecutar: gcloud projects get-iam-policy $project
 
-## Ver configuraciones creadas hasta ahora (PROJECT estara ASIGNADO para todas las configuraciones)
+## Comprobamos permisos (rol) del usuario Administrador
 ```bash
-gcloud config configurations list
+gcloud projects get-iam-policy $project --flatten="bindings[].members" --filter="bindings.members:user:$admin"
 ```
 
+## Comprobamos permisos (rol) del usuario Developer
+```bash
+gcloud projects get-iam-policy $project --flatten="bindings[].members" --filter="bindings.members:user:$dev"
+```
+
+## Comprobamos miembros con Rol Dueño (owner)
+```bash
+gcloud projects get-iam-policy $project --flatten="bindings[].members" --format="table(bindings.members)" --filter="bindings.role:roles/owner"
+```
+
+## Comprobamos miembros con Rol Editor (editor)
+```bash
+gcloud projects get-iam-policy $project --flatten="bindings[].members" --format="table(bindings.members)" --filter="bindings.role:roles/editor"
+```
+
+## Comprobamos miembros con Rol Visualizador (viewer)
+```bash
+gcloud projects get-iam-policy $project --flatten="bindings[].members" --format="table(bindings.members)" --filter="bindings.role:roles/viewer"
+```
+
+## Comprobamos permisos del Developer (roles/viewer)
+```bash
+gcloud projects get-iam-policy $project --flatten="bindings[].members" --format="table(bindings.members)" --filter="bindings.role:roles/viewer"
+```
+
+## Comprobamos miembros con Rol Visualizador (viewer)
+```bash
+gcloud projects get-iam-policy $project --flatten="bindings[].members" --format="table(bindings.members)" --filter="bindings.role:roles/viewer"
+```
+
+## Comparamos permisos para "Storage" de Administrador
+```bash
+gcloud iam roles describe $(gcloud projects get-iam-policy $project --flatten="bindings[].members" --filter="bindings.members:user:$admin" --format "value(bindings.role)") --flatten="includedPermissions[]" --format="table(includedPermissions)" | grep storage
+```
+
+## Comparamos permisos para "Storage" de Developer
+```bash
+gcloud iam roles describe $(gcloud projects get-iam-policy $project --flatten="bindings[].members" --filter="bindings.members:user:$dev" --format "value(bindings.role)") --flatten="includedPermissions[]" --format="table(includedPermissions)" | grep storage
+```
