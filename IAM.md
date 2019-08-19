@@ -197,3 +197,47 @@ gcloud config configurations activate config-$project-admin
 ```bash
 gsutil iam get gs://bucket-$project
 ```
+
+## Damos Rol "Object Creator" a Developer
+```bash
+gsutil iam ch user:$dev:objectCreator gs://bucket-$project
+```
+
+## Obtener politica del Bucket, actualziada.
+```bash
+gsutil iam get gs://bucket-$project
+```
+
+## Cambiaremos a la configuración Developer
+```bash
+gcloud config configurations activate config-$project-dev
+```
+
+## Crearemos un archivo de texto (2) y lo subiremos al bucket
+```bash
+echo "hola mundo" > archivo-dev.txt ; gsutil cp archivo-dev.txt gs://bucket-$project
+```
+## Listaremos el contenido del bucket
+```bash
+gsutil ls gs://bucket-$project
+```
+
+## Cambiaremos a la configuración Administrador
+```bash
+gcloud config configurations activate config-$project-admin
+```
+
+## Quitamos Rol "Object Creator" a Developer
+```bash
+gsutil iam ch -d user:$dev:objectCreator gs://bucket-$project
+```
+
+## Cambiaremos a la configuración Developer
+```bash
+gcloud config configurations activate config-$project-dev
+```
+
+## Subiremos el mismo archivo al bucket, pero con otro nombre (en destino)
+```bash
+gsutil cp archivo-dev.txt gs://bucket-$project/archivo-dev-1.txt
+```
