@@ -113,11 +113,6 @@ gcloud config list
 gcloud config configurations list
 ```
 
-## Cambiaremos a la configuración admin
-```bash
-gcloud config configurations activate $config_activa
-```
-
 ## Comprobamos rol(es) del usuario Administrador
 ```bash
 gcloud projects get-iam-policy $project --flatten="bindings[].members" --filter="bindings.members:user:$admin"
@@ -128,12 +123,77 @@ gcloud projects get-iam-policy $project --flatten="bindings[].members" --filter=
 gcloud projects get-iam-policy $project --flatten="bindings[].members" --filter="bindings.members:user:$dev"
 ```
 
-## Comparamos permisos para "Storage" de Administrador
+## Comparamos permisos para el Administrador
 ```bash
 gcloud iam roles describe $(gcloud projects get-iam-policy $project --flatten="bindings[].members" --filter="bindings.members:user:$admin" --format "value(bindings.role)") --flatten="includedPermissions[]" --format="table(includedPermissions)" | grep storage
 ```
 
-## Comparamos permisos para "Storage" de Developer
+## Comparamos permisos para el Developer
 ```bash
 gcloud iam roles describe $(gcloud projects get-iam-policy $project --flatten="bindings[].members" --filter="bindings.members:user:$dev" --format "value(bindings.role)") --flatten="includedPermissions[]" --format="table(includedPermissions)" | grep storage
+```
+
+## Cambiaremos a la configuración Developer
+```bash
+gcloud config configurations activate config-$project-dev
+```
+
+## Crearemos -intentaremos- un Bucket (repositorio de almacenamiento)
+```bash
+gsutil mb gs://bucket-$project
+```
+Como no tenemos permisos para crear buckets (solo viualizar) obtendremos el error:
+Creating gs://bucket-**id-proyecto**/...
+AccessDeniedException: 403 **email** does not have storage.buckets.create access to project **numero de proyecto**
+
+
+## Cambiaremos a la configuración Administrador
+```bash
+gcloud config configurations activate config-$project-admin
+```
+
+## Crearemos un Bucket (repositorio de almacenamiento)
+```bash
+gsutil mb gs://bucket-$project
+```
+Comando ejecutado sin problemas: Creating gs://bucket-**id-proyecto**/...
+
+## Crearemos un archivo de texto y lo subiremos al bucket
+```bash
+echo "hola mundo" > archivo.txt ; gsutil cp archivo.txt gs://bucket-$project
+```
+
+## Listaremos el contenido del bucket
+```bash
+gsutil ls gs://bucket-$project
+```
+
+## Cambiaremos a la configuración Developer
+```bash
+gcloud config configurations activate config-$project-dev
+```
+
+## Listaremos el contenido del bucket
+```bash
+gsutil ls gs://bucket-$project
+```
+
+## Crearemos un archivo de texto (2) y lo subiremos al bucket
+```bash
+echo "hola mundo" > archivo2.txt ; gsutil cp archivo2.txt gs://bucket-$project
+```
+Obtenemos el error:
+Copying file://archivo2.txt [Content-Type=text/plain]...
+AccessDeniedException: 403 **email** does not have storage.objects.create access to bucket-$project/archivo2.txt.
+
+**Solo tenemos permiso para leer archivos en un bucket, no para crear Buckets, ni crear archivos en ellos**
+
+## Cambiaremos a la configuración Administrador
+```bash
+gcloud config configurations activate config-$project-admin
+```
+
+## Obtener politica del Bucket
+```bash
+gsutil iam get gs://bucket-$project
 ```
